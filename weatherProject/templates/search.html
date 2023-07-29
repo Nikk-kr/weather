@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <h1><strong>Weather Forecast</strong></h1>
+    <form method="post">
+      {% csrf_token %}
+      <input
+        type="text"
+        name="city"
+        placeholder="Choose Your City"
+        autocomplete="off"
+        required
+      />
+      <button>Search</button>
+    </form>
+    <br /><br /><br />
+
+    <div>
+      {% if weather %}
+      <div>
+        <h2>Country Code: {{ weather.country_code }}</h2>
+        <h2>Coordinates [x,y]: {{ weather.coordinate }}</h2>
+        <h2>Temprature: {{ weather.temp }}</h2>
+        <h2>Min. Temprature: {{ weather.min_temp }}</h2>
+        <h2>Max. Temprature: {{ weather.max_temp }}</h2>
+        <h2>Pressure: {{ weather.pressure }}</h2>
+        <h2>Humidity: {{ weather.humidity }}</h2>
+        <h2>
+          Forecast: {{ weather.main }} {% comment %}
+          <img
+            src="http://openweathermap.org/img/w/{{weather.icon}}.png"
+            alt="Image"
+            style="width: 100px"
+          />
+          {% endcomment %}
+        </h2>
+        <h2>Description: {{ weather.description }}</h2>
+        <img
+          src="http://openweathermap.org/img/w/{{weather.icon}}.png"
+          alt="Image"
+          style="width: 100px"
+        />
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
